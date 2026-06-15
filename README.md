@@ -330,7 +330,7 @@ npm run dev
 
 ## 👥 Team
 
-**Team SK8-infi**
+**Team Argus**
 
 ---
 
