@@ -1,0 +1,1629 @@
+{
+  "dataset": {
+    "total_samples": 12710,
+    "normal_samples": 12399,
+    "insider_samples": 311,
+    "imbalance_ratio": 39.9,
+    "n_features": 47,
+    "n_employees": 200,
+    "n_insiders": 14
+  },
+  "class_imbalance": {
+    "positive_rate": 2.45,
+    "scenarios": {
+      "credential_compromise": 3,
+      "slow_burn_recon": 3,
+      "data_exfiltration": 2,
+      "pre_resignation_theft": 2,
+      "privilege_escalation": 2,
+      "unauthorized_snooping": 2
+    }
+  },
+  "feature_stats": [
+    {
+      "feature": "login_hour",
+      "category": "Temporal",
+      "normal_mean": 9.061534,
+      "normal_std": 0.377709,
+      "insider_mean": 10.02283,
+      "insider_std": 2.821382,
+      "ratio": 1.1061,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "logout_hour",
+      "category": "Temporal",
+      "normal_mean": 18.134711,
+      "normal_std": 0.717164,
+      "insider_mean": 18.395884,
+      "insider_std": 1.349615,
+      "ratio": 1.0144,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "session_duration_hrs",
+      "category": "Temporal",
+      "normal_mean": 9.07316,
+      "normal_std": 0.818341,
+      "insider_mean": 8.373183,
+      "insider_std": 2.387453,
+      "ratio": 0.9229,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "is_weekend",
+      "category": "Temporal",
+      "normal_mean": 0.020405,
+      "normal_std": 0.141386,
+      "insider_mean": 0.118971,
+      "insider_std": 0.324276,
+      "ratio": 5.8305,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "is_after_hours",
+      "category": "Temporal",
+      "normal_mean": 0.760948,
+      "normal_std": 0.426521,
+      "insider_mean": 0.787781,
+      "insider_std": 0.409538,
+      "ratio": 1.0353,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "time_since_last_session",
+      "category": "Temporal",
+      "normal_mean": 1.388822,
+      "normal_std": 0.786875,
+      "insider_mean": 1.279743,
+      "insider_std": 0.710889,
+      "ratio": 0.9215,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "login_regularity_score",
+      "category": "Temporal",
+      "normal_mean": 0.290523,
+      "normal_std": 0.249078,
+      "insider_mean": 1.136849,
+      "insider_std": 2.777257,
+      "ratio": 3.9131,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "temporal_entropy",
+      "category": "Temporal",
+      "normal_mean": 2.281348,
+      "normal_std": 0.104591,
+      "insider_mean": 1.984788,
+      "insider_std": 0.67406,
+      "ratio": 0.87,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "files_accessed",
+      "category": "Access Volume",
+      "normal_mean": 6.551335,
+      "normal_std": 4.436546,
+      "insider_mean": 7.151125,
+      "insider_std": 4.715758,
+      "ratio": 1.0916,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "emails_sent",
+      "category": "Access Volume",
+      "normal_mean": 3.664489,
+      "normal_std": 2.65294,
+      "insider_mean": 3.649518,
+      "insider_std": 2.604461,
+      "ratio": 0.9959,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "emails_received",
+      "category": "Access Volume",
+      "normal_mean": 1.824341,
+      "normal_std": 1.630128,
+      "insider_mean": 1.710611,
+      "insider_std": 1.5387,
+      "ratio": 0.9377,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "urls_visited",
+      "category": "Access Volume",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.051447,
+      "insider_std": 0.221264,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "usb_events",
+      "category": "Access Volume",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.064309,
+      "insider_std": 0.245697,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "data_volume_mb",
+      "category": "Access Volume",
+      "normal_mean": 2.247821,
+      "normal_std": 1.231088,
+      "insider_mean": 12.172119,
+      "insider_std": 13.591995,
+      "ratio": 5.4151,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "unique_systems_accessed",
+      "category": "Access Volume",
+      "normal_mean": 4.272845,
+      "normal_std": 0.638722,
+      "insider_mean": 4.771704,
+      "insider_std": 1.211226,
+      "ratio": 1.1168,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "is_new_device",
+      "category": "Device & Location",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.356913,
+      "insider_std": 0.479861,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "device_count",
+      "category": "Device & Location",
+      "normal_mean": 1.0,
+      "normal_std": 0.0,
+      "insider_mean": 1.334405,
+      "insider_std": 0.565748,
+      "ratio": 1.3344,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "unique_pcs",
+      "category": "Device & Location",
+      "normal_mean": 1.0,
+      "normal_std": 0.0,
+      "insider_mean": 1.334405,
+      "insider_std": 0.565748,
+      "ratio": 1.3344,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "geo_anomaly_flag",
+      "category": "Device & Location",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.025723,
+      "insider_std": 0.158564,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "vpn_usage",
+      "category": "Device & Location",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.025723,
+      "insider_std": 0.158564,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "external_email_ratio",
+      "category": "Communication",
+      "normal_mean": 0.296559,
+      "normal_std": 0.237488,
+      "insider_mean": 0.308596,
+      "insider_std": 0.239326,
+      "ratio": 1.0406,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "avg_attachment_size",
+      "category": "Communication",
+      "normal_mean": 0.666068,
+      "normal_std": 0.696884,
+      "insider_mean": 3.207264,
+      "insider_std": 5.503064,
+      "ratio": 4.8152,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "unique_recipients",
+      "category": "Communication",
+      "normal_mean": 3.800306,
+      "normal_std": 2.481933,
+      "insider_mean": 3.784566,
+      "insider_std": 2.431358,
+      "ratio": 0.9959,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "cc_bcc_ratio",
+      "category": "Communication",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.0,
+      "insider_std": 0.0,
+      "ratio": 1.0,
+      "direction": "="
+    },
+    {
+      "feature": "email_content_sentiment",
+      "category": "Communication",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.0,
+      "insider_std": 0.0,
+      "ratio": 1.0,
+      "direction": "="
+    },
+    {
+      "feature": "unusual_recipient_flag",
+      "category": "Communication",
+      "normal_mean": 0.148964,
+      "normal_std": 0.356067,
+      "insider_mean": 0.157556,
+      "insider_std": 0.364912,
+      "ratio": 1.0577,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "file_copy_count",
+      "category": "Data Movement",
+      "normal_mean": 0.833212,
+      "normal_std": 1.553506,
+      "insider_mean": 1.382637,
+      "insider_std": 1.456317,
+      "ratio": 1.6594,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "usb_file_transfers",
+      "category": "Data Movement",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.0,
+      "insider_std": 0.0,
+      "ratio": 1.0,
+      "direction": "="
+    },
+    {
+      "feature": "large_download_flag",
+      "category": "Data Movement",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.376206,
+      "insider_std": 0.485213,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "sensitive_file_access",
+      "category": "Data Movement",
+      "normal_mean": 1.071941,
+      "normal_std": 4.572284,
+      "insider_mean": 1.241158,
+      "insider_std": 3.429903,
+      "ratio": 1.1579,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "data_egress_volume",
+      "category": "Data Movement",
+      "normal_mean": 0.338532,
+      "normal_std": 0.399502,
+      "insider_mean": 2.73581,
+      "insider_std": 3.972355,
+      "ratio": 8.0814,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "print_count",
+      "category": "Data Movement",
+      "normal_mean": 0.228809,
+      "normal_std": 0.809778,
+      "insider_mean": 0.045016,
+      "insider_std": 0.382563,
+      "ratio": 0.1967,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "cloud_upload_count",
+      "category": "Data Movement",
+      "normal_mean": 0.149609,
+      "normal_std": 0.763409,
+      "insider_mean": 0.0,
+      "insider_std": 0.0,
+      "ratio": 0.0,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "access_to_role_ratio",
+      "category": "Behavioral Ratios",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.122069,
+      "insider_std": 0.285236,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "peer_deviation_score",
+      "category": "Behavioral Ratios",
+      "normal_mean": -0.017669,
+      "normal_std": 0.46706,
+      "insider_mean": 0.704448,
+      "insider_std": 0.686931,
+      "ratio": -39.8689,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "weekday_vs_weekend_ratio",
+      "category": "Behavioral Ratios",
+      "normal_mean": 0.023162,
+      "normal_std": 0.072635,
+      "insider_mean": 0.101519,
+      "insider_std": 0.12357,
+      "ratio": 4.383,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "morning_vs_evening_ratio",
+      "category": "Behavioral Ratios",
+      "normal_mean": 0.339632,
+      "normal_std": 0.035971,
+      "insider_mean": 0.264085,
+      "insider_std": 0.126469,
+      "ratio": 0.7776,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "productive_vs_idle_ratio",
+      "category": "Behavioral Ratios",
+      "normal_mean": 1.111161,
+      "normal_std": 0.442939,
+      "insider_mean": 1.019787,
+      "insider_std": 0.347266,
+      "ratio": 0.9178,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "command_diversity_index",
+      "category": "Behavioral Ratios",
+      "normal_mean": 0.365312,
+      "normal_std": 0.132787,
+      "insider_mean": 0.464245,
+      "insider_std": 0.190365,
+      "ratio": 1.2708,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "action_sequence_entropy",
+      "category": "Sequence",
+      "normal_mean": 2.349512,
+      "normal_std": 0.177298,
+      "insider_mean": 2.341239,
+      "insider_std": 0.527077,
+      "ratio": 0.9965,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "longest_unusual_chain",
+      "category": "Sequence",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.842444,
+      "insider_std": 1.451673,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "role_boundary_crossings",
+      "category": "Sequence",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 1.282958,
+      "insider_std": 2.128986,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "privilege_escalation_count",
+      "category": "Sequence",
+      "normal_mean": 0.0,
+      "normal_std": 0.0,
+      "insider_mean": 0.045016,
+      "insider_std": 0.207674,
+      "ratio": 999.0,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "session_action_diversity",
+      "category": "Sequence",
+      "normal_mean": 12.838535,
+      "normal_std": 2.023868,
+      "insider_mean": 13.636656,
+      "insider_std": 4.118386,
+      "ratio": 1.0622,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "repeat_pattern_score",
+      "category": "Sequence",
+      "normal_mean": 0.634688,
+      "normal_std": 0.132787,
+      "insider_mean": 0.535755,
+      "insider_std": 0.190365,
+      "ratio": 0.8441,
+      "direction": "\u2193"
+    },
+    {
+      "feature": "novelty_score",
+      "category": "Sequence",
+      "normal_mean": 0.061376,
+      "normal_std": 0.240028,
+      "insider_mean": 0.787781,
+      "insider_std": 1.068604,
+      "ratio": 12.8353,
+      "direction": "\u2191"
+    },
+    {
+      "feature": "behavioral_velocity",
+      "category": "Sequence",
+      "normal_mean": 4.444648,
+      "normal_std": 1.771757,
+      "insider_mean": 4.006129,
+      "insider_std": 1.460894,
+      "ratio": 0.9013,
+      "direction": "\u2193"
+    }
+  ],
+  "statistical_tests": [
+    {
+      "feature": "peer_deviation_score",
+      "t_stat": 18.4319,
+      "t_p": 4.402708900160676e-52,
+      "u_p": 5.171139930942244e-74,
+      "cohens_d": 1.2308,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "large_download_flag",
+      "t_stat": 13.6733,
+      "t_p": 1.2511970205937404e-33,
+      "u_p": 0.0,
+      "cohens_d": 1.0983,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "is_new_device",
+      "t_stat": 13.1168,
+      "t_p": 1.4419281524301004e-31,
+      "u_p": 0.0,
+      "cohens_d": 1.0536,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "data_volume_mb",
+      "t_stat": 12.8751,
+      "t_p": 1.1082953681795556e-30,
+      "u_p": 4.03917345342143e-122,
+      "cohens_d": 1.03,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "novelty_score",
+      "t_stat": 11.9803,
+      "t_p": 1.901944669691646e-27,
+      "u_p": 4.6538435137550275e-112,
+      "cohens_d": 0.9394,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "role_boundary_crossings",
+      "t_stat": 10.6272,
+      "t_p": 1.0643021052096022e-22,
+      "u_p": 0.0,
+      "cohens_d": 0.8536,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "data_egress_volume",
+      "t_stat": 10.6413,
+      "t_p": 9.493764212598097e-23,
+      "u_p": 1.1101798487312808e-107,
+      "cohens_d": 0.8505,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "device_count",
+      "t_stat": 10.4239,
+      "t_p": 5.22184894811755e-22,
+      "u_p": 0.0,
+      "cohens_d": 0.8373,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "unique_pcs",
+      "t_stat": 10.4239,
+      "t_p": 5.22184894811755e-22,
+      "u_p": 0.0,
+      "cohens_d": 0.8373,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "longest_unusual_chain",
+      "t_stat": 10.2342,
+      "t_p": 2.274149929008344e-21,
+      "u_p": 0.0,
+      "cohens_d": 0.822,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "morning_vs_evening_ratio",
+      "t_stat": -10.5237,
+      "t_p": 2.3319286503075924e-22,
+      "u_p": 8.089470351328967e-34,
+      "cohens_d": -0.8138,
+      "significance": "\ud83d\udd34 LARGE"
+    },
+    {
+      "feature": "weekday_vs_weekend_ratio",
+      "t_stat": 11.1346,
+      "t_p": 1.6524725704095406e-24,
+      "u_p": 6.746814379850433e-63,
+      "cohens_d": 0.774,
+      "significance": "\ud83d\udfe0 MEDIUM"
+    },
+    {
+      "feature": "avg_attachment_size",
+      "t_stat": 8.1419,
+      "t_p": 9.563069300366029e-15,
+      "u_p": 5.0780890029621855e-51,
+      "cohens_d": 0.6489,
+      "significance": "\ud83d\udfe0 MEDIUM"
+    },
+    {
+      "feature": "temporal_entropy",
+      "t_stat": -7.7564,
+      "t_p": 1.2664069345248526e-13,
+      "u_p": 0.00017597231730517298,
+      "cohens_d": -0.6158,
+      "significance": "\ud83d\udfe0 MEDIUM"
+    },
+    {
+      "feature": "access_to_role_ratio",
+      "t_stat": 7.5471,
+      "t_p": 4.995434291085953e-13,
+      "u_p": 0.0,
+      "cohens_d": 0.6062,
+      "significance": "\ud83d\udfe0 MEDIUM"
+    },
+    {
+      "feature": "command_diversity_index",
+      "t_stat": 9.1097,
+      "t_p": 9.502586293163877e-18,
+      "u_p": 1.935674539693069e-20,
+      "cohens_d": 0.6035,
+      "significance": "\ud83d\udfe0 MEDIUM"
+    },
+    {
+      "feature": "repeat_pattern_score",
+      "t_stat": -9.1097,
+      "t_p": 9.502586293163355e-18,
+      "u_p": 1.935674539693069e-20,
+      "cohens_d": -0.6035,
+      "significance": "\ud83d\udfe0 MEDIUM"
+    },
+    {
+      "feature": "unique_systems_accessed",
+      "t_stat": 7.2381,
+      "t_p": 3.511905265753275e-12,
+      "u_p": 3.4050664683388294e-41,
+      "cohens_d": 0.5159,
+      "significance": "\ud83d\udfe0 MEDIUM"
+    },
+    {
+      "feature": "login_hour",
+      "t_stat": 6.0073,
+      "t_p": 5.278205471663192e-09,
+      "u_p": 1.1766984269648546e-09,
+      "cohens_d": 0.4783,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "login_regularity_score",
+      "t_stat": 5.3735,
+      "t_p": 1.5196304131742262e-07,
+      "u_p": 0.37179762865842003,
+      "cohens_d": 0.4299,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "is_weekend",
+      "t_stat": 5.3476,
+      "t_p": 1.7227623990276077e-07,
+      "u_p": 1.360908057606659e-30,
+      "cohens_d": 0.3946,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "session_duration_hrs",
+      "t_stat": -5.1629,
+      "t_p": 4.341665338362228e-07,
+      "u_p": 0.5059680974285613,
+      "cohens_d": -0.3928,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "usb_events",
+      "t_stat": 4.6158,
+      "t_p": 5.741299475250228e-06,
+      "u_p": 1.1146913956117676e-175,
+      "cohens_d": 0.3708,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "file_copy_count",
+      "t_stat": 6.5603,
+      "t_p": 2.093758378913366e-10,
+      "u_p": 6.291880982278777e-30,
+      "cohens_d": 0.3652,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "urls_visited",
+      "t_stat": 4.1004,
+      "t_p": 5.2734819511974354e-05,
+      "u_p": 6.609278994366544e-141,
+      "cohens_d": 0.3294,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "privilege_escalation_count",
+      "t_stat": 3.8227,
+      "t_p": 0.00015955844064803723,
+      "u_p": 1.5965710872354218e-123,
+      "cohens_d": 0.307,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "print_count",
+      "t_stat": -8.033,
+      "t_p": 1.1834539570351007e-14,
+      "u_p": 8.747583120836689e-07,
+      "cohens_d": -0.2903,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "cloud_upload_count",
+      "t_stat": -21.8219,
+      "t_p": 1.2645538103114347e-103,
+      "u_p": 7.87065856540534e-05,
+      "cohens_d": -0.2772,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "behavioral_velocity",
+      "t_stat": -5.1986,
+      "t_p": 3.510075700243314e-07,
+      "u_p": 0.0032334107169590906,
+      "cohens_d": -0.2702,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "session_action_diversity",
+      "t_stat": 3.4073,
+      "t_p": 0.000741607661638858,
+      "u_p": 2.4455611580035495e-33,
+      "cohens_d": 0.2463,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "logout_hour",
+      "t_stat": 3.4007,
+      "t_p": 0.0007589372476165429,
+      "u_p": 0.00018128863100647167,
+      "cohens_d": 0.242,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "geo_anomaly_flag",
+      "t_stat": 2.8609,
+      "t_p": 0.004511249220050224,
+      "u_p": 2.258112756228368e-71,
+      "cohens_d": 0.2298,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "vpn_usage",
+      "t_stat": 2.8609,
+      "t_p": 0.004511249220050224,
+      "u_p": 2.258112756228368e-71,
+      "cohens_d": 0.2298,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "productive_vs_idle_ratio",
+      "t_stat": -4.5484,
+      "t_p": 7.560675834140819e-06,
+      "u_p": 0.026023553267602067,
+      "cohens_d": -0.2297,
+      "significance": "\ud83d\udfe1 SMALL"
+    },
+    {
+      "feature": "time_since_last_session",
+      "t_stat": -2.6653,
+      "t_p": 0.008070914623733653,
+      "u_p": 0.010028030434461068,
+      "cohens_d": -0.1456,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "files_accessed",
+      "t_stat": 2.2185,
+      "t_p": 0.027213431749917392,
+      "u_p": 0.02074043388167786,
+      "cohens_d": 0.1311,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "emails_received",
+      "t_stat": -1.2855,
+      "t_p": 0.1995257180880428,
+      "u_p": 0.30629966904299133,
+      "cohens_d": -0.0718,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "is_after_hours",
+      "t_stat": 1.1401,
+      "t_p": 0.2550985848097713,
+      "u_p": 0.27272222422365366,
+      "cohens_d": 0.0642,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "external_email_ratio",
+      "t_stat": 0.8762,
+      "t_p": 0.3815792528966893,
+      "u_p": 0.2762158784845242,
+      "cohens_d": 0.0505,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "sensitive_file_access",
+      "t_stat": 0.8513,
+      "t_p": 0.39521771205666106,
+      "u_p": 2.0940981599914134e-72,
+      "cohens_d": 0.0419,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "unusual_recipient_flag",
+      "t_stat": 0.4104,
+      "t_p": 0.68179187044089,
+      "u_p": 0.6744280220637383,
+      "cohens_d": 0.0239,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "action_sequence_entropy",
+      "t_stat": -0.2764,
+      "t_p": 0.7824221542456863,
+      "u_p": 2.080882084917632e-30,
+      "cohens_d": -0.0211,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "unique_recipients",
+      "t_stat": -0.1127,
+      "t_p": 0.910332575341472,
+      "u_p": 0.978784265477611,
+      "cohens_d": -0.0064,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "emails_sent",
+      "t_stat": -0.1001,
+      "t_p": 0.920342621232029,
+      "u_p": 0.992453767742146,
+      "cohens_d": -0.0057,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "cc_bcc_ratio",
+      "t_stat": NaN,
+      "t_p": NaN,
+      "u_p": 1.0,
+      "cohens_d": 0.0,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "email_content_sentiment",
+      "t_stat": NaN,
+      "t_p": NaN,
+      "u_p": 1.0,
+      "cohens_d": 0.0,
+      "significance": "\u26aa NONE"
+    },
+    {
+      "feature": "usb_file_transfers",
+      "t_stat": NaN,
+      "t_p": NaN,
+      "u_p": 1.0,
+      "cohens_d": 0.0,
+      "significance": "\u26aa NONE"
+    }
+  ],
+  "correlations": [
+    {
+      "feature": "is_new_device",
+      "pearson": 0.592661,
+      "spearman": 0.592661
+    },
+    {
+      "feature": "data_volume_mb",
+      "pearson": 0.531089,
+      "spearman": 0.208459
+    },
+    {
+      "feature": "device_count",
+      "pearson": 0.504783,
+      "spearman": 0.530224
+    },
+    {
+      "feature": "unique_pcs",
+      "pearson": 0.504783,
+      "spearman": 0.530224
+    },
+    {
+      "feature": "cc_bcc_ratio",
+      "pearson": NaN,
+      "spearman": NaN
+    },
+    {
+      "feature": "email_content_sentiment",
+      "pearson": NaN,
+      "spearman": NaN
+    },
+    {
+      "feature": "usb_file_transfers",
+      "pearson": NaN,
+      "spearman": NaN
+    },
+    {
+      "feature": "large_download_flag",
+      "pearson": 0.608613,
+      "spearman": 0.608613
+    },
+    {
+      "feature": "role_boundary_crossings",
+      "pearson": 0.512066,
+      "spearman": 0.570718
+    },
+    {
+      "feature": "longest_unusual_chain",
+      "pearson": 0.497888,
+      "spearman": 0.613834
+    },
+    {
+      "feature": "data_egress_volume",
+      "pearson": 0.449901,
+      "spearman": 0.195533
+    },
+    {
+      "feature": "access_to_role_ratio",
+      "pearson": 0.389868,
+      "spearman": 0.570717
+    },
+    {
+      "feature": "novelty_score",
+      "pearson": 0.361006,
+      "spearman": 0.19954
+    },
+    {
+      "feature": "avg_attachment_size",
+      "pearson": 0.335862,
+      "spearman": 0.133273
+    },
+    {
+      "feature": "temporal_entropy",
+      "pearson": -0.296672,
+      "spearman": -0.033275
+    },
+    {
+      "feature": "morning_vs_evening_ratio",
+      "pearson": -0.275992,
+      "spearman": -0.107526
+    },
+    {
+      "feature": "login_regularity_score",
+      "pearson": 0.253651,
+      "spearman": 0.007922
+    },
+    {
+      "feature": "usb_events",
+      "pearson": 0.250667,
+      "spearman": 0.250667
+    },
+    {
+      "feature": "login_hour",
+      "pearson": 0.24914,
+      "spearman": 0.053962
+    },
+    {
+      "feature": "peer_deviation_score",
+      "pearson": 0.229295,
+      "spearman": 0.161441
+    },
+    {
+      "feature": "urls_visited",
+      "pearson": 0.224168,
+      "spearman": 0.224168
+    },
+    {
+      "feature": "privilege_escalation_count",
+      "pearson": 0.209674,
+      "spearman": 0.209674
+    },
+    {
+      "feature": "weekday_vs_weekend_ratio",
+      "pearson": 0.160841,
+      "spearman": 0.148487
+    },
+    {
+      "feature": "geo_anomaly_flag",
+      "pearson": 0.158461,
+      "spearman": 0.158461
+    },
+    {
+      "feature": "vpn_usage",
+      "pearson": 0.158461,
+      "spearman": 0.158461
+    },
+    {
+      "feature": "session_duration_hrs",
+      "pearson": -0.120613,
+      "spearman": -0.0059
+    },
+    {
+      "feature": "unique_systems_accessed",
+      "pearson": 0.116236,
+      "spearman": 0.119241
+    },
+    {
+      "feature": "command_diversity_index",
+      "pearson": 0.112939,
+      "spearman": 0.082192
+    },
+    {
+      "feature": "repeat_pattern_score",
+      "pearson": -0.112939,
+      "spearman": -0.082192
+    },
+    {
+      "feature": "is_weekend",
+      "pearson": 0.101986,
+      "spearman": 0.101986
+    },
+    {
+      "feature": "session_action_diversity",
+      "pearson": 0.058623,
+      "spearman": 0.106719
+    },
+    {
+      "feature": "file_copy_count",
+      "pearson": 0.054645,
+      "spearman": 0.100807
+    },
+    {
+      "feature": "logout_hour",
+      "pearson": 0.054521,
+      "spearman": 0.033209
+    },
+    {
+      "feature": "behavioral_velocity",
+      "pearson": -0.038364,
+      "spearman": -0.02612
+    },
+    {
+      "feature": "print_count",
+      "pearson": -0.035384,
+      "spearman": -0.043624
+    },
+    {
+      "feature": "productive_vs_idle_ratio",
+      "pearson": -0.032009,
+      "spearman": -0.019744
+    },
+    {
+      "feature": "cloud_upload_count",
+      "pearson": -0.030642,
+      "spearman": -0.035023
+    },
+    {
+      "feature": "time_since_last_session",
+      "pearson": -0.021462,
+      "spearman": -0.02284
+    },
+    {
+      "feature": "files_accessed",
+      "pearson": 0.020851,
+      "spearman": 0.020514
+    },
+    {
+      "feature": "emails_received",
+      "pearson": -0.010794,
+      "spearman": -0.009075
+    },
+    {
+      "feature": "is_after_hours",
+      "pearson": 0.009729,
+      "spearman": 0.009729
+    },
+    {
+      "feature": "external_email_ratio",
+      "pearson": 0.007829,
+      "spearman": 0.009659
+    },
+    {
+      "feature": "action_sequence_entropy",
+      "pearson": -0.006606,
+      "spearman": 0.10166
+    },
+    {
+      "feature": "sensitive_file_access",
+      "pearson": 0.005749,
+      "spearman": 0.159632
+    },
+    {
+      "feature": "unusual_recipient_flag",
+      "pearson": 0.003726,
+      "spearman": 0.003726
+    },
+    {
+      "feature": "unique_recipients",
+      "pearson": -0.00098,
+      "spearman": 0.000236
+    },
+    {
+      "feature": "emails_sent",
+      "pearson": -0.000872,
+      "spearman": -8.4e-05
+    }
+  ],
+  "cross_correlations": [
+    {
+      "feat_a": "device_count",
+      "feat_b": "unique_pcs",
+      "corr": 1.0
+    },
+    {
+      "feat_a": "geo_anomaly_flag",
+      "feat_b": "vpn_usage",
+      "corr": 1.0
+    },
+    {
+      "feat_a": "command_diversity_index",
+      "feat_b": "repeat_pattern_score",
+      "corr": -1.0
+    },
+    {
+      "feat_a": "productive_vs_idle_ratio",
+      "feat_b": "behavioral_velocity",
+      "corr": 0.9992
+    },
+    {
+      "feat_a": "emails_sent",
+      "feat_b": "unique_recipients",
+      "corr": 0.9933
+    },
+    {
+      "feat_a": "action_sequence_entropy",
+      "feat_b": "session_action_diversity",
+      "corr": 0.9281
+    },
+    {
+      "feat_a": "longest_unusual_chain",
+      "feat_b": "role_boundary_crossings",
+      "corr": 0.8885
+    },
+    {
+      "feat_a": "command_diversity_index",
+      "feat_b": "behavioral_velocity",
+      "corr": -0.8711
+    },
+    {
+      "feat_a": "repeat_pattern_score",
+      "feat_b": "behavioral_velocity",
+      "corr": 0.8711
+    },
+    {
+      "feat_a": "productive_vs_idle_ratio",
+      "feat_b": "command_diversity_index",
+      "corr": -0.8673
+    },
+    {
+      "feat_a": "productive_vs_idle_ratio",
+      "feat_b": "repeat_pattern_score",
+      "corr": 0.8673
+    },
+    {
+      "feat_a": "is_new_device",
+      "feat_b": "role_boundary_crossings",
+      "corr": 0.864
+    },
+    {
+      "feat_a": "data_volume_mb",
+      "feat_b": "data_egress_volume",
+      "corr": 0.8503
+    },
+    {
+      "feat_a": "access_to_role_ratio",
+      "feat_b": "longest_unusual_chain",
+      "corr": 0.8015
+    },
+    {
+      "feat_a": "is_new_device",
+      "feat_b": "longest_unusual_chain",
+      "corr": 0.7883
+    },
+    {
+      "feat_a": "login_hour",
+      "feat_b": "login_regularity_score",
+      "corr": 0.7877
+    },
+    {
+      "feat_a": "data_volume_mb",
+      "feat_b": "large_download_flag",
+      "corr": 0.7669
+    },
+    {
+      "feat_a": "login_regularity_score",
+      "feat_b": "access_to_role_ratio",
+      "corr": 0.7655
+    },
+    {
+      "feat_a": "logout_hour",
+      "feat_b": "session_duration_hrs",
+      "corr": 0.7507
+    },
+    {
+      "feat_a": "is_new_device",
+      "feat_b": "device_count",
+      "corr": 0.7443
+    },
+    {
+      "feat_a": "is_new_device",
+      "feat_b": "unique_pcs",
+      "corr": 0.7443
+    },
+    {
+      "feat_a": "data_volume_mb",
+      "feat_b": "device_count",
+      "corr": 0.743
+    },
+    {
+      "feat_a": "data_volume_mb",
+      "feat_b": "unique_pcs",
+      "corr": 0.743
+    },
+    {
+      "feat_a": "sensitive_file_access",
+      "feat_b": "novelty_score",
+      "corr": 0.7224
+    },
+    {
+      "feat_a": "session_duration_hrs",
+      "feat_b": "temporal_entropy",
+      "corr": 0.7135
+    },
+    {
+      "feat_a": "large_download_flag",
+      "feat_b": "role_boundary_crossings",
+      "corr": 0.7073
+    },
+    {
+      "feat_a": "unique_systems_accessed",
+      "feat_b": "action_sequence_entropy",
+      "corr": 0.7039
+    },
+    {
+      "feat_a": "unique_systems_accessed",
+      "feat_b": "session_action_diversity",
+      "corr": 0.7021
+    },
+    {
+      "feat_a": "device_count",
+      "feat_b": "large_download_flag",
+      "corr": 0.7006
+    },
+    {
+      "feat_a": "unique_pcs",
+      "feat_b": "large_download_flag",
+      "corr": 0.7006
+    }
+  ],
+  "mutual_information": [
+    {
+      "feature": "data_volume_mb",
+      "mi_score": 0.051804
+    },
+    {
+      "feature": "data_egress_volume",
+      "mi_score": 0.044568
+    },
+    {
+      "feature": "longest_unusual_chain",
+      "mi_score": 0.037867
+    },
+    {
+      "feature": "unique_systems_accessed",
+      "mi_score": 0.035901
+    },
+    {
+      "feature": "large_download_flag",
+      "mi_score": 0.03554
+    },
+    {
+      "feature": "is_new_device",
+      "mi_score": 0.034512
+    },
+    {
+      "feature": "novelty_score",
+      "mi_score": 0.034463
+    },
+    {
+      "feature": "role_boundary_crossings",
+      "mi_score": 0.032444
+    },
+    {
+      "feature": "peer_deviation_score",
+      "mi_score": 0.031481
+    },
+    {
+      "feature": "unique_pcs",
+      "mi_score": 0.030814
+    },
+    {
+      "feature": "access_to_role_ratio",
+      "mi_score": 0.030387
+    },
+    {
+      "feature": "device_count",
+      "mi_score": 0.030008
+    },
+    {
+      "feature": "sensitive_file_access",
+      "mi_score": 0.025988
+    },
+    {
+      "feature": "avg_attachment_size",
+      "mi_score": 0.023713
+    },
+    {
+      "feature": "session_action_diversity",
+      "mi_score": 0.022264
+    },
+    {
+      "feature": "morning_vs_evening_ratio",
+      "mi_score": 0.02157
+    },
+    {
+      "feature": "action_sequence_entropy",
+      "mi_score": 0.019844
+    },
+    {
+      "feature": "weekday_vs_weekend_ratio",
+      "mi_score": 0.018672
+    },
+    {
+      "feature": "temporal_entropy",
+      "mi_score": 0.018228
+    },
+    {
+      "feature": "session_duration_hrs",
+      "mi_score": 0.012768
+    },
+    {
+      "feature": "repeat_pattern_score",
+      "mi_score": 0.011385
+    },
+    {
+      "feature": "command_diversity_index",
+      "mi_score": 0.011312
+    },
+    {
+      "feature": "login_hour",
+      "mi_score": 0.011311
+    },
+    {
+      "feature": "login_regularity_score",
+      "mi_score": 0.010464
+    },
+    {
+      "feature": "file_copy_count",
+      "mi_score": 0.008143
+    },
+    {
+      "feature": "logout_hour",
+      "mi_score": 0.006428
+    },
+    {
+      "feature": "usb_events",
+      "mi_score": 0.006281
+    },
+    {
+      "feature": "privilege_escalation_count",
+      "mi_score": 0.005793
+    },
+    {
+      "feature": "urls_visited",
+      "mi_score": 0.004326
+    },
+    {
+      "feature": "print_count",
+      "mi_score": 0.003741
+    },
+    {
+      "feature": "behavioral_velocity",
+      "mi_score": 0.00288
+    },
+    {
+      "feature": "emails_received",
+      "mi_score": 0.002423
+    },
+    {
+      "feature": "geo_anomaly_flag",
+      "mi_score": 0.002255
+    },
+    {
+      "feature": "cloud_upload_count",
+      "mi_score": 0.002236
+    },
+    {
+      "feature": "is_weekend",
+      "mi_score": 0.002011
+    },
+    {
+      "feature": "productive_vs_idle_ratio",
+      "mi_score": 0.001977
+    },
+    {
+      "feature": "external_email_ratio",
+      "mi_score": 0.001505
+    },
+    {
+      "feature": "vpn_usage",
+      "mi_score": 0.001383
+    },
+    {
+      "feature": "is_after_hours",
+      "mi_score": 0.001262
+    },
+    {
+      "feature": "time_since_last_session",
+      "mi_score": 0.000855
+    },
+    {
+      "feature": "files_accessed",
+      "mi_score": 0.000795
+    },
+    {
+      "feature": "unique_recipients",
+      "mi_score": 0.000777
+    },
+    {
+      "feature": "emails_sent",
+      "mi_score": 0.000172
+    },
+    {
+      "feature": "cc_bcc_ratio",
+      "mi_score": 0.0
+    },
+    {
+      "feature": "email_content_sentiment",
+      "mi_score": 0.0
+    },
+    {
+      "feature": "unusual_recipient_flag",
+      "mi_score": 0.0
+    },
+    {
+      "feature": "usb_file_transfers",
+      "mi_score": 0.0
+    }
+  ],
+  "temporal_analysis": "See per-insider tables in report",
+  "scenario_profiles": {
+    "data_exfiltration": {
+      "data_volume_mb": 35.865297,
+      "sensitive_file_access": 1.675676,
+      "usb_events": 0.540541,
+      "is_after_hours": 0.972973,
+      "unique_systems_accessed": 4.486486,
+      "role_boundary_crossings": 1.675676,
+      "novelty_score": 2.162162,
+      "privilege_escalation_count": 0.0,
+      "behavioral_velocity": 4.819822,
+      "geo_anomaly_flag": 0.0,
+      "external_email_ratio": 0.28077,
+      "is_new_device": 0.810811,
+      "files_accessed": 6.621622,
+      "access_to_role_ratio": 0.204538
+    },
+    "credential_compromise": {
+      "data_volume_mb": 6.435083,
+      "sensitive_file_access": 0.0,
+      "usb_events": 0.0,
+      "is_after_hours": 1.0,
+      "unique_systems_accessed": 4.333333,
+      "role_boundary_crossings": 0.0,
+      "novelty_score": 1.333333,
+      "privilege_escalation_count": 0.0,
+      "behavioral_velocity": 4.6088,
+      "geo_anomaly_flag": 0.666667,
+      "external_email_ratio": 0.289725,
+      "is_new_device": 0.666667,
+      "files_accessed": 7.083333,
+      "access_to_role_ratio": 0.0
+    },
+    "pre_resignation_theft": {
+      "data_volume_mb": 11.039978,
+      "sensitive_file_access": 0.0,
+      "usb_events": 0.0,
+      "is_after_hours": 0.755556,
+      "unique_systems_accessed": 4.555556,
+      "role_boundary_crossings": 0.0,
+      "novelty_score": 0.0,
+      "privilege_escalation_count": 0.0,
+      "behavioral_velocity": 4.67858,
+      "geo_anomaly_flag": 0.0,
+      "external_email_ratio": 0.317364,
+      "is_new_device": 0.0,
+      "files_accessed": 8.0,
+      "access_to_role_ratio": 0.0
+    },
+    "privilege_escalation": {
+      "data_volume_mb": 13.0155,
+      "sensitive_file_access": 8.863636,
+      "usb_events": 0.0,
+      "is_after_hours": 0.863636,
+      "unique_systems_accessed": 5.090909,
+      "role_boundary_crossings": 3.590909,
+      "novelty_score": 1.590909,
+      "privilege_escalation_count": 0.636364,
+      "behavioral_velocity": 3.650909,
+      "geo_anomaly_flag": 0.0,
+      "external_email_ratio": 0.277673,
+      "is_new_device": 0.727273,
+      "files_accessed": 2.0,
+      "access_to_role_ratio": 0.313718
+    },
+    "unauthorized_snooping": {
+      "data_volume_mb": 16.114132,
+      "sensitive_file_access": 1.897059,
+      "usb_events": 0.0,
+      "is_after_hours": 0.382353,
+      "unique_systems_accessed": 4.617647,
+      "role_boundary_crossings": 3.794118,
+      "novelty_score": 1.676471,
+      "privilege_escalation_count": 0.0,
+      "behavioral_velocity": 3.243893,
+      "geo_anomaly_flag": 0.0,
+      "external_email_ratio": 0.263996,
+      "is_new_device": 0.838235,
+      "files_accessed": 3.147059,
+      "access_to_role_ratio": 0.345496
+    },
+    "slow_burn_recon": {
+      "data_volume_mb": 3.955835,
+      "sensitive_file_access": 0.0,
+      "usb_events": 0.0,
+      "is_after_hours": 0.929134,
+      "unique_systems_accessed": 5.0,
+      "role_boundary_crossings": 0.0,
+      "novelty_score": 0.0,
+      "privilege_escalation_count": 0.0,
+      "behavioral_velocity": 3.943514,
+      "geo_anomaly_flag": 0.0,
+      "external_email_ratio": 0.344616,
+      "is_new_device": 0.0,
+      "files_accessed": 10.047244,
+      "access_to_role_ratio": 0.0
+    }
+  },
+  "dead_features": [
+    "urls_visited",
+    "usb_events",
+    "is_new_device",
+    "device_count",
+    "unique_pcs",
+    "geo_anomaly_flag",
+    "vpn_usage",
+    "cc_bcc_ratio",
+    "email_content_sentiment",
+    "usb_file_transfers",
+    "large_download_flag",
+    "access_to_role_ratio",
+    "longest_unusual_chain",
+    "role_boundary_crossings",
+    "privilege_escalation_count"
+  ],
+  "interactions": [
+    {
+      "pair": "access_to_role_ratio \u00d7 unique_systems_accessed",
+      "corr_with_label": 0.46987,
+      "ratio": 999.0,
+      "improvement_pct": 20.5
+    },
+    {
+      "pair": "role_boundary_crossings \u00d7 data_egress_volume",
+      "corr_with_label": 0.406746,
+      "ratio": 999.0,
+      "improvement_pct": -20.6
+    },
+    {
+      "pair": "external_email_ratio \u00d7 data_volume_mb",
+      "corr_with_label": 0.375513,
+      "ratio": 5.098,
+      "improvement_pct": -29.3
+    },
+    {
+      "pair": "behavioral_velocity \u00d7 novelty_score",
+      "corr_with_label": 0.350351,
+      "ratio": 14.4079,
+      "improvement_pct": -3.0
+    },
+    {
+      "pair": "login_regularity_score \u00d7 is_new_device",
+      "corr_with_label": 0.324027,
+      "ratio": 999.0,
+      "improvement_pct": -45.3
+    },
+    {
+      "pair": "usb_events \u00d7 data_volume_mb",
+      "corr_with_label": 0.231717,
+      "ratio": 999.0,
+      "improvement_pct": -56.4
+    },
+    {
+      "pair": "privilege_escalation_count \u00d7 is_after_hours",
+      "corr_with_label": 0.209674,
+      "ratio": 999.0,
+      "improvement_pct": 0.0
+    },
+    {
+      "pair": "is_new_device \u00d7 geo_anomaly_flag",
+      "corr_with_label": 0.158461,
+      "ratio": 999.0,
+      "improvement_pct": -73.3
+    },
+    {
+      "pair": "files_accessed \u00d7 is_after_hours",
+      "corr_with_label": 0.031941,
+      "ratio": 1.1882,
+      "improvement_pct": 53.2
+    },
+    {
+      "pair": "is_after_hours \u00d7 sensitive_file_access",
+      "corr_with_label": 0.002663,
+      "ratio": 1.0822,
+      "improvement_pct": -72.6
+    }
+  ]
+}
