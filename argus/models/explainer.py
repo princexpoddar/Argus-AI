@@ -165,8 +165,8 @@ class AlertExplainer:
     def fit(self, normal_features: pd.DataFrame, feature_cols: list[str]):
         """Learn normal feature statistics for deviation analysis."""
         self.feature_cols = feature_cols
-        self.feature_means = normal_features[feature_cols].mean().values
-        self.feature_stds = normal_features[feature_cols].std().values
+        self.feature_means = normal_features[feature_cols].mean().values.copy()
+        self.feature_stds = normal_features[feature_cols].std().values.copy()
         self.feature_stds[self.feature_stds == 0] = 1.0
         logger.info(f"Explainer fitted on {len(normal_features)} normal samples")
 
@@ -228,11 +228,11 @@ class AlertExplainer:
             attributions.append({
                 "feature": col,
                 "display_name": display_name,
-                "value": val,
-                "z_score": round(z_score, 3),
-                "abs_z": abs(z_score),
+                "value": float(val),
+                "z_score": round(float(z_score), 3),
+                "abs_z": round(float(abs(z_score)), 3),
                 "direction": "above" if z_score > 0 else "below",
-                "significant": abs(z_score) > 2.0,
+                "significant": bool(abs(z_score) > 2.0),
             })
 
         # Sort by absolute z-score
@@ -267,8 +267,8 @@ class AlertExplainer:
                 matched.append({
                     "step": signal["step"],
                     "label": signal["label"],
-                    "triggered": signal_triggered,
-                    "strength": round(max_z, 2),
+                    "triggered": bool(signal_triggered),
+                    "strength": round(float(max_z), 2),
                 })
 
             n_matched = sum(1 for m in matched if m["triggered"])
