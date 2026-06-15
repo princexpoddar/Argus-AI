@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Argus AI — Hackathon Pitch Deck</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #030712; --bg2: #0a0f1e; --card: rgba(15,23,42,0.6);
+  --text: #f1f5f9; --muted: #94a3b8; --dim: #64748b;
+  --cyan: #06b6d4; --purple: #8b5cf6; --red: #ef4444;
+  --green: #22c55e; --amber: #f59e0b; --pink: #ec4899;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; }
+
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 50% at 20% 20%, rgba(6,182,212,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(139,92,246,0.05) 0%, transparent 60%);
+}
+
+.slide { display: none; width: 100vw; height: 100vh; position: relative; z-index: 1; padding: 60px 80px; flex-direction: column; justify-content: center; }
+.slide.active { display: flex; }
+
+.slide-counter { position: fixed; bottom: 24px; right: 40px; font-family: 'JetBrains Mono'; font-size: 13px; color: var(--dim); z-index: 100; }
+.nav-hint { position: fixed; bottom: 24px; left: 40px; font-size: 12px; color: var(--dim); z-index: 100; }
+.progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--purple)); z-index: 100; transition: width 0.4s ease; }
+
+h1 { font-size: 52px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; }
+h1 .gradient { background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+h2 { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 32px; }
+h2 .accent { color: var(--cyan); }
+h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: var(--cyan); }
+.subtitle { font-size: 20px; color: var(--muted); margin-top: 16px; line-height: 1.5; max-width: 700px; }
+.tag { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; margin: 4px; }
+.tag-cyan { background: rgba(6,182,212,0.12); color: var(--cyan); border: 1px solid rgba(6,182,212,0.2); }
+.tag-purple { background: rgba(139,92,246,0.12); color: var(--purple); border: 1px solid rgba(139,92,246,0.2); }
+.tag-red { background: rgba(239,68,68,0.12); color: var(--red); border: 1px solid rgba(239,68,68,0.2); }
+.tag-green { background: rgba(34,197,94,0.12); color: var(--green); border: 1px solid rgba(34,197,94,0.2); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+.card { background: var(--card); border: 1px solid rgba(148,163,184,0.06); border-radius: 14px; padding: 24px; backdrop-filter: blur(20px); }
+.card-glow { border-color: rgba(6,182,212,0.15); box-shadow: 0 0 20px rgba(6,182,212,0.1); }
+.card h3 { margin-bottom: 12px; }
+.card p, .card li { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+.metric-box { text-align: center; padding: 28px 16px; border-radius: 14px; background: var(--card); border: 1px solid rgba(148,163,184,0.06); }
+.metric-box .value { font-size: 42px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
+.metric-box .label { font-size: 12px; color: var(--muted); margin-top: 8px; text-transform: uppercase; letter-spacing: 0.06em; }
+.metric-box.accent .value { background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.bar-chart { margin-top: 16px; }
+.bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.bar-label { font-size: 11px; font-family: 'JetBrains Mono'; color: var(--muted); min-width: 180px; text-align: right; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { flex: 1; height: 22px; background: rgba(148,163,184,0.05); border-radius: 4px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; font-size: 10px; font-family: 'JetBrains Mono'; font-weight: 600; color: white; transition: width 1s ease; }
+.bar-value { font-size: 11px; font-family: 'JetBrains Mono'; color: var(--text); min-width: 50px; font-weight: 600; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { text-align: left; padding: 10px 14px; color: var(--dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid rgba(148,163,184,0.1); }
+td { padding: 10px 14px; border-bottom: 1px solid rgba(148,163,184,0.04); color: var(--muted); }
+td:first-child { color: var(--text); font-weight: 500; }
+td .check { color: var(--green); }
+td .warn { color: var(--amber); }
+
+.emoji { font-size: 28px; margin-bottom: 12px; display: block; }
+.center { text-align: center; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+ul { padding-left: 20px; }
+li { margin-bottom: 6px; font-size: 15px; color: var(--muted); line-height: 1.6; }
+li strong { color: var(--text); }
+
+.arch-box { display: inline-block; padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; text-align: center; min-width: 120px; }
+.arch-cyan { background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); color: var(--cyan); }
+.arch-purple { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); color: var(--purple); }
+.arch-green { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.2); color: var(--green); }
+.arch-red { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: var(--red); }
+.arch-amber { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: var(--amber); }
+.arch-arrow { color: var(--dim); font-size: 20px; margin: 0 8px; vertical-align: middle; }
+
+.innovation-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(148,163,184,0.06); }
+.innovation-num { font-size: 28px; font-weight: 900; color: var(--purple); min-width: 36px; font-family: 'JetBrains Mono'; }
+.innovation-text h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.innovation-text p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+.pipeline-step { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.pipeline-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.pipeline-line { width: 2px; height: 20px; margin-left: 4px; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.slide.active > * { animation: fadeIn 0.5s ease forwards; }
+.slide.active > *:nth-child(2) { animation-delay: 0.1s; }
+.slide.active > *:nth-child(3) { animation-delay: 0.2s; }
+.slide.active > *:nth-child(4) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="slide-counter" id="counter"></div>
+<div class="nav-hint">← → Arrow keys to navigate</div>
+
+<!-- ═══ SLIDE 1: Title ═══ -->
+<div class="slide active" id="s1">
+  <div>
+    <div style="font-size:64px; margin-bottom:16px;">🔱</div>
+    <h1><span class="gradient">Argus AI</span></h1>
+    <p class="subtitle">Privacy-Preserving Digital Employee Twins for Continuous Insider Threat Detection in Indian Banking</p>
+    <div class="mt-24">
+      <span class="tag tag-cyan">LightGBM F1 = 0.949</span>
+      <span class="tag tag-purple">211 Features</span>
+      <span class="tag tag-green">14 Insiders Detected</span>
+      <span class="tag tag-red">6 Attack Scenarios</span>
+    </div>
+    <p style="font-size:14px; color:var(--dim); margin-top:32px;">CyberShield PSBs Hackathon Series 2026 — Bank of Baroda<br>Team MuleShield</p>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 2: Problem ═══ -->
+<div class="slide" id="s2">
+  <h2>The <span class="accent">Problem</span></h2>
+  <div class="grid-2">
+    <div>
+      <ul>
+        <li><strong>60%</strong> of data breaches involve insiders (IBM X-Force 2024)</li>
+        <li><strong>$15.4M</strong> average cost per insider incident (Ponemon 2023)</li>
+        <li><strong>85 days</strong> average time to detect an insider threat</li>
+        <li>Indian banking: <strong>RBI mandate</strong> for privileged access monitoring</li>
+        <li>Rule-based systems generate <strong>thousands of false alerts</strong> → analyst fatigue</li>
+      </ul>
+      <div class="card mt-24" style="border-left: 3px solid var(--red);">
+        <p><strong style="color:var(--red);">Key Insight:</strong> Insiders don't trigger single anomalies. They execute <strong>multi-step attack campaigns</strong> over weeks — gradual escalation that looks normal in isolation.</p>
+      </div>
+    </div>
+    <div>
+      <div class="metric-box" style="margin-bottom:16px;">
+        <div class="value" style="color:var(--red);">60%</div>
+        <div class="label">Breaches involve insiders</div>
+      </div>
+      <div class="metric-box" style="margin-bottom:16px;">
+        <div class="value" style="color:var(--amber);">85d</div>
+        <div class="label">Average detection time</div>
+      </div>
+      <div class="metric-box">
+        <div class="value" style="color:var(--red);">$15.4M</div>
+        <div class="label">Cost per incident</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 3: Solution ═══ -->
+<div class="slide" id="s3">
+  <h2>Our <span class="accent">Solution</span>: Digital Employee Twins</h2>
+  <p style="color:var(--muted); font-size:16px; margin-bottom:28px;">A behavioral twin = a multi-dimensional fingerprint of every employee's "normal" — continuously compared against live activity.</p>
+  <div class="grid-3">
+    <div class="card">
+      <span class="emoji">🕐</span>
+      <h3>Circadian Rhythms</h3>
+      <p>Login/logout patterns, session duration, temporal entropy — detects after-hours anomalies</p>
+    </div>
+    <div class="card">
+      <span class="emoji">🖥️</span>
+      <h3>Access Topology</h3>
+      <p>System access patterns, role boundary crossings — detects unauthorized scope expansion</p>
+    </div>
+    <div class="card">
+      <span class="emoji">📊</span>
+      <h3>Data Patterns</h3>
+      <p>Record volumes, data egress, USB/cloud transfers — detects bulk exfiltration</p>
+    </div>
+    <div class="card">
+      <span class="emoji">🔄</span>
+      <h3>Behavioral Velocity</h3>
+      <p>Day-over-day deltas, rolling trends, acceleration — detects ramp-up attacks</p>
+    </div>
+    <div class="card">
+      <span class="emoji">👥</span>
+      <h3>Peer Context</h3>
+      <p>Department & role z-scores — detects slow-burn insiders who normalize gradually</p>
+    </div>
+    <div class="card">
+      <span class="emoji">🤖</span>
+      <h3>AI Explainability</h3>
+      <p>SHAP + Gemini AI — tells analysts <em>why</em> someone was flagged, in plain English</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 4: Architecture ═══ -->
+<div class="slide" id="s4">
+  <h2>System <span class="accent">Architecture</span></h2>
+  <div style="text-align:center; margin-top:16px;">
+    <div style="display:flex; justify-content:center; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+      <div class="arch-box arch-cyan">Synthetic Generator<br><small style="font-size:10px;">200 emps × 90 days</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box arch-purple">Feature Engineering<br><small style="font-size:10px;">47 → 211 features</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box arch-green">Risk Scoring<br><small style="font-size:10px;">LightGBM + XGBoost + LSTM + IF</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box arch-amber">Explainability<br><small style="font-size:10px;">SHAP + Kill Chains</small></div>
+      <span class="arch-arrow">→</span>
+      <div class="arch-box arch-red">Dashboard<br><small style="font-size:10px;">Next.js 16 + Gemini AI</small></div>
+    </div>
+    <div class="grid-3 mt-16">
+      <div class="card" style="text-align:left;">
+        <h3>Data Layer</h3>
+        <p>Markov Chain + GMM synthetic generator<br>505K events, 14 insider labels<br>6 attack scenarios calibrated to CERT r4.2</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <h3>ML Layer</h3>
+        <p>211-feature behavioral genome<br>4-model ensemble + meta-learner<br>SMOTE+Tomek for class imbalance (2.9%→23%)</p>
+      </div>
+      <div class="card" style="text-align:left;">
+        <h3>Presentation Layer</h3>
+        <p>FastAPI REST API (7 endpoints)<br>Next.js 16 premium dashboard<br>Gemini AI threat reports & chat</p>
+      </div>
+    </div>
+    <div class="card mt-16" style="text-align:left; border-color:rgba(139,92,246,0.2);">
+      <h3 style="color:var(--purple);">Privacy Layer (Compliance-Ready)</h3>
+      <p>Federated Stacking — per-department model silos, only scalar predictions shared. AUC=0.974 with <strong>zero raw data crossing department boundaries</strong>. DPDPA aligned.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 5: Feature Engineering ═══ -->
+<div class="slide" id="s5">
+  <h2>211-Feature <span class="accent">Behavioral Genome</span></h2>
+  <div class="grid-2">
+    <div>
+      <h3>Base → Enhanced Pipeline</h3>
+      <table>
+        <tr><th>Enhancement</th><th>Count</th><th>Signal</th></tr>
+        <tr><td>Base features</td><td>47</td><td>Temporal, volume, device, sequence</td></tr>
+        <tr><td>Drop dead features</td><td>−7</td><td>cc_bcc_ratio always 0, r=1.0 duplicates</td></tr>
+        <tr><td>Temporal deltas</td><td>+24</td><td>Day-over-day change detection</td></tr>
+        <tr><td>Rolling windows (7d/14d)</td><td>+96</td><td>Trend, volatility, peaks, cumulative</td></tr>
+        <tr><td>Velocity + acceleration</td><td>+10</td><td>Smoothed trends + change-of-trend</td></tr>
+        <tr><td>Feature interactions</td><td>+13</td><td>after_hours × sensitive_access</td></tr>
+        <tr><td>Peer z-scores</td><td>+18</td><td>Department & role deviation</td></tr>
+        <tr><td>Cumulative risk</td><td>+10</td><td>Anomaly streaks, expanding maxima</td></tr>
+        <tr style="font-weight:700;"><td style="color:var(--cyan);">Total</td><td style="color:var(--cyan);">211</td><td></td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>Top 10 Features (XGBoost Importance)</h3>
+      <div class="bar-chart" id="featureChart"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 6: Model Performance ═══ -->
+<div class="slide" id="s6">
+  <h2>Model <span class="accent">Performance</span></h2>
+  <div class="grid-4 mt-16">
+    <div class="metric-box accent"><div class="value">0.949</div><div class="label">F1 Score</div></div>
+    <div class="metric-box accent"><div class="value">0.983</div><div class="label">AUC-ROC</div></div>
+    <div class="metric-box"><div class="value" style="color:var(--green);">0.959</div><div class="label">Precision</div></div>
+    <div class="metric-box"><div class="value" style="color:var(--green);">0.940</div><div class="label">Recall</div></div>
+  </div>
+  <div class="grid-2 mt-24">
+    <div class="card">
+      <h3>Model Comparison</h3>
+      <table>
+        <tr><th>Model</th><th>F1</th><th>AUC</th><th>FPR</th></tr>
+        <tr><td><strong>LightGBM v2.0</strong></td><td style="color:var(--cyan); font-weight:700;">0.949</td><td>0.983</td><td>0.001</td></tr>
+        <tr><td>XGBoost v2.0</td><td>0.939</td><td>0.988</td><td>0.001</td></tr>
+        <tr><td>Meta-Learner</td><td>0.940</td><td>0.979</td><td>0.002</td></tr>
+        <tr><td>LSTM Autoencoder</td><td>0.333</td><td>—</td><td>—</td></tr>
+        <tr><td>Isolation Forest</td><td>0.305</td><td>—</td><td>—</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Cross-Validation (5-Fold Stratified)</h3>
+      <table>
+        <tr><th>Metric</th><th>Mean ± Std</th></tr>
+        <tr><td>F1</td><td style="font-family:'JetBrains Mono';">0.893 ± 0.055</td></tr>
+        <tr><td>AUC</td><td style="font-family:'JetBrains Mono';">0.981 ± 0.012</td></tr>
+        <tr><td>Precision</td><td style="font-family:'JetBrains Mono';">0.836 ± 0.094</td></tr>
+        <tr><td>Recall</td><td style="font-family:'JetBrains Mono';">0.967 ± 0.067</td></tr>
+      </table>
+      <div class="mt-16">
+        <h3>Meta-Learner Weights</h3>
+        <div class="bar-chart" id="weightChart"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 7: Attack Scenarios ═══ -->
+<div class="slide" id="s7">
+  <h2>6 <span class="accent">Attack Scenarios</span> Detected</h2>
+  <div class="grid-3 mt-16">
+    <div class="card" style="border-top: 3px solid var(--red);">
+      <span class="emoji">💾</span>
+      <h3 style="color:var(--red);">Data Exfiltration</h3>
+      <p>Bulk customer download via USB after hours<br><strong>14-day ramp → 5-day attack</strong><br>Detected: <span class="check">✓ 100%</span></p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--red);">
+      <span class="emoji">🔓</span>
+      <h3 style="color:var(--red);">Privilege Escalation</h3>
+      <p>Superadmin on production systems<br><strong>7-day ramp → 3-day attack</strong><br>Detected: <span class="check">✓ 100%</span></p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--amber);">
+      <span class="emoji">🌐</span>
+      <h3 style="color:var(--amber);">Credential Compromise</h3>
+      <p>Impossible travel, simultaneous logins<br><strong>0-day ramp → 5-day attack</strong><br>Detected: <span class="check">✓ 100%</span></p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--amber);">
+      <span class="emoji">📦</span>
+      <h3 style="color:var(--amber);">Pre-Resignation Theft</h3>
+      <p>Job search + gradual data ramp<br><strong>21-day ramp → 7-day attack</strong><br>Detected: <span class="check">✓ 100%</span></p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--purple);">
+      <span class="emoji">👀</span>
+      <h3 style="color:var(--purple);">Unauthorized Snooping</h3>
+      <p>HR accessing customer financials<br><strong>21-day ramp → 14-day attack</strong><br>Detected: <span class="check">✓ 100%</span></p>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--purple);">
+      <span class="emoji">🔍</span>
+      <h3 style="color:var(--purple);">Slow-Burn Recon</h3>
+      <p>1 new system/week, 5% daily growth<br><strong>30-day ramp → 30-day attack</strong><br>Detected: <span class="check">✓ 100%</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 8: Adversarial Robustness ═══ -->
+<div class="slide" id="s8">
+  <h2>Adversarial <span class="accent">Robustness</span></h2>
+  <p style="color:var(--muted); margin-bottom:24px;">We tested 7 evasion strategies an insider might use to evade detection.</p>
+  <div class="grid-2">
+    <div class="card">
+      <table>
+        <tr><th>Evasion Strategy</th><th>Detection</th><th>Evaded?</th></tr>
+        <tr><td>Random noise (±10%)</td><td style="color:var(--green);">100%</td><td>❌ No</td></tr>
+        <tr><td>Feature zeroing</td><td style="color:var(--green);">100%</td><td>❌ No</td></tr>
+        <tr><td>Timing shift</td><td style="color:var(--green);">100%</td><td>❌ No</td></tr>
+        <tr><td>Weekend mimicry</td><td style="color:var(--green);">100%</td><td>❌ No</td></tr>
+        <tr><td>Role mimicry</td><td style="color:var(--green);">100%</td><td>❌ No</td></tr>
+        <tr><td>Gradual change (5%/day)</td><td style="color:var(--green);">100%</td><td>❌ No</td></tr>
+        <tr><td>1-sigma mimicry (extreme)</td><td style="color:var(--amber);">71.4%</td><td>⚠️ Partial</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:16px;">
+        <h3>Latency Benchmarks</h3>
+        <table>
+          <tr><th>Metric</th><th>Result</th><th>Target</th></tr>
+          <tr><td>Model inference</td><td style="color:var(--green); font-weight:700;">&lt;1ms</td><td>—</td></tr>
+          <tr><td>API scoring</td><td style="color:var(--green); font-weight:700;">~70ms</td><td>&lt;200ms ✅</td></tr>
+          <tr><td>Batch throughput</td><td style="color:var(--green); font-weight:700;">150K+/sec</td><td>1000+/sec ✅</td></tr>
+        </table>
+      </div>
+      <div class="card" style="border-color:rgba(34,197,94,0.2);">
+        <h3 style="color:var(--green);">Key Finding</h3>
+        <p>Only 1-sigma mimicry partially evades — requires the insider to constrain <strong>all 211 features</strong> within 1 standard deviation of normal. This is operationally infeasible for real attacks.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 9: Dashboard + Gemini ═══ -->
+<div class="slide" id="s9">
+  <h2>Live <span class="accent">Dashboard</span> + Gemini AI</h2>
+  <div class="grid-2">
+    <div>
+      <div class="card" style="margin-bottom:16px;">
+        <h3>7 Dashboard Pages</h3>
+        <ul>
+          <li><strong>Command Center</strong> — Trust heatmap for 200 employees</li>
+          <li><strong>Alert Queue</strong> — Kill chain analysis with severity</li>
+          <li><strong>Employee Detail</strong> — Twin radar, SHAP waterfall, AI</li>
+          <li><strong>Analytics</strong> — Model metrics, feature importance</li>
+          <li><strong>Digital Twin</strong> — Behavioral genome deviation</li>
+        </ul>
+      </div>
+      <div class="card" style="border-color:rgba(139,92,246,0.2);">
+        <h3 style="color:var(--purple);">🤖 Gemini AI Integration</h3>
+        <ul>
+          <li><strong>Threat Reports</strong> — structured assessment in plain English</li>
+          <li><strong>Recommendations</strong> — prioritized actions with RBI compliance</li>
+          <li><strong>Interactive Chat</strong> — "Why was this person flagged?"</li>
+        </ul>
+        <p class="mt-16" style="font-size:12px; color:var(--dim);">Powered by Gemini 2.0 Flash Lite • API key server-side only</p>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="padding:16px; margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:600; margin-bottom:8px;">SHAP Explainability (why EMP_001 was flagged)</div>
+        <div id="shapDemo"></div>
+      </div>
+      <div class="card" style="padding:16px;">
+        <div style="font-size:13px; font-weight:600; margin-bottom:8px;">Trust Score Distribution</div>
+        <div id="trustDist"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 10: Innovations ═══ -->
+<div class="slide" id="s10">
+  <h2>8 <span class="accent">Novel</span> Contributions</h2>
+  <div class="grid-2">
+    <div>
+      <div class="innovation-item"><div class="innovation-num">01</div><div class="innovation-text"><h4>211-Feature Behavioral Genome</h4><p>7 categories × deltas, rolling windows, velocity, peer z-scores, interactions</p></div></div>
+      <div class="innovation-item"><div class="innovation-num">02</div><div class="innovation-text"><h4>Deep Feature Investigation</h4><p>Removed 7 dead features (r=1.0 duplicates, constant-zero), boosted F1 0.87→0.95</p></div></div>
+      <div class="innovation-item"><div class="innovation-num">03</div><div class="innovation-text"><h4>Privilege Decay Functions</h4><p>Trust as perishable resource: T(t) = T(t-1) × e^(-λΔt) + reinforcement</p></div></div>
+      <div class="innovation-item"><div class="innovation-num">04</div><div class="innovation-text"><h4>Kill Chain Detection</h4><p>6 multi-step attack narratives — catches slow campaigns</p></div></div>
+    </div>
+    <div>
+      <div class="innovation-item"><div class="innovation-num">05</div><div class="innovation-text"><h4>SHAP + Gemini Explainability</h4><p>Quantitative (SHAP waterfall) + qualitative (AI reports) — judges see why</p></div></div>
+      <div class="innovation-item"><div class="innovation-num">06</div><div class="innovation-text"><h4>Federated Stacking</h4><p>Per-department silos + meta-learner. Zero raw data crossing boundaries</p></div></div>
+      <div class="innovation-item"><div class="innovation-num">07</div><div class="innovation-text"><h4>Adversarial Robustness Testing</h4><p>7 evasion strategies benchmarked — only extreme mimicry partially evades</p></div></div>
+      <div class="innovation-item"><div class="innovation-num">08</div><div class="innovation-text"><h4>Indian Banking Specificity</h4><p>5 depts, 14 roles, 8 branches, 24 banking systems, RBI aligned</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SLIDE 11: Thank You ═══ -->
+<div class="slide" id="s11">
+  <div class="center">
+    <div style="font-size:80px; margin-bottom:24px;">🔱</div>
+    <h1><span class="gradient">Thank You</span></h1>
+    <p class="subtitle" style="margin:16px auto 0;">Argus AI — The All-Seeing Guardian of Banking Identity Trust</p>
+    <div class="mt-32" style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
+      <span class="tag tag-cyan">F1 = 0.949</span>
+      <span class="tag tag-purple">211 Features</span>
+      <span class="tag tag-green">14/14 Insiders</span>
+      <span class="tag tag-red">< 1ms Inference</span>
+    </div>
+    <div class="mt-32">
+      <p style="color:var(--dim); font-size:14px;">Team MuleShield — CyberShield PSBs Hackathon 2026</p>
+      <p style="color:var(--dim); font-size:13px; margin-top:8px;">github.com/SK8-infi/Argus-AI</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── Slide Navigation ───
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+const total = slides.length;
+
+function showSlide(n) {
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, total - 1));
+  slides[current].classList.add('active');
+  document.getElementById('counter').textContent = `${current + 1} / ${total}`;
+  document.getElementById('progress').style.width = `${((current + 1) / total) * 100}%`;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); showSlide(current + 1); }
+  if (e.key === 'ArrowLeft') showSlide(current - 1);
+  if (e.key === 'Home') showSlide(0);
+  if (e.key === 'End') showSlide(total - 1);
+});
+
+document.addEventListener('click', e => {
+  if (e.clientX > window.innerWidth / 2) showSlide(current + 1);
+  else showSlide(current - 1);
+});
+
+showSlide(0);
+
+// ─── Feature Importance Chart ───
+const features = [
+  { name: 'roll_7d_max_data_vol', val: 0.257 },
+  { name: 'roll_14d_std_data_vol', val: 0.067 },
+  { name: 'expanding_max_systems', val: 0.061 },
+  { name: 'roll_14d_std_novelty', val: 0.044 },
+  { name: 'zscore_role_systems', val: 0.032 },
+  { name: 'roll_7d_std_novelty', val: 0.028 },
+  { name: 'clearance_normalized', val: 0.022 },
+  { name: 'roll_7d_std_egress', val: 0.020 },
+  { name: 'delta_novelty_score', val: 0.017 },
+  { name: 'is_weekend', val: 0.016 },
+];
+const maxF = features[0].val;
+const fChart = document.getElementById('featureChart');
+features.forEach(f => {
+  const w = (f.val / maxF * 100).toFixed(1);
+  fChart.innerHTML += `<div class="bar-row">
+    <div class="bar-label">${f.name}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:${w}%; background:linear-gradient(90deg,#06b6d4,#8b5cf6);"></div></div>
+    <div class="bar-value">${(f.val * 100).toFixed(1)}%</div>
+  </div>`;
+});
+
+// ─── Meta-Learner Weight Chart ───
+const weights = [
+  { name: 'LightGBM', val: 6.186, color: '#06b6d4' },
+  { name: 'XGBoost', val: 6.125, color: '#8b5cf6' },
+  { name: 'Isolation Forest', val: 1.001, color: '#f59e0b' },
+  { name: 'LSTM-AE', val: 0.011, color: '#64748b' },
+];
+const maxW = weights[0].val;
+const wChart = document.getElementById('weightChart');
+weights.forEach(w => {
+  const pct = (w.val / maxW * 100).toFixed(1);
+  wChart.innerHTML += `<div class="bar-row">
+    <div class="bar-label" style="min-width:120px;">${w.name}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:${pct}%; background:${w.color};"></div></div>
+    <div class="bar-value">${w.val.toFixed(2)}</div>
+  </div>`;
+});
+
+// ─── SHAP Demo ───
+const shapFactors = [
+  { name: 'roll_7d_max_data_vol', val: 0.15, risk: true },
+  { name: 'roll_14d_std_data_vol', val: 0.08, risk: true },
+  { name: 'clearance_normalized', val: 0.06, risk: true },
+  { name: 'expanding_max_systems', val: 0.05, risk: true },
+  { name: 'is_weekend', val: -0.02, risk: false },
+  { name: 'login_regularity', val: -0.03, risk: false },
+];
+const shapMax = 0.15;
+const shapEl = document.getElementById('shapDemo');
+shapFactors.forEach(f => {
+  const w = (Math.abs(f.val) / shapMax * 100).toFixed(0);
+  const c = f.risk ? '#ef4444' : '#22c55e';
+  const bg = f.risk ? 'rgba(239,68,68,0.08)' : 'rgba(34,197,94,0.08)';
+  shapEl.innerHTML += `<div style="display:grid;grid-template-columns:130px 1fr 50px;align-items:center;gap:8px;padding:4px 8px;border-radius:6px;background:${bg};margin-bottom:4px;border:1px solid ${c}15;">
+    <div style="font-size:10px;font-family:'JetBrains Mono';color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${f.risk?'↑':'↓'} ${f.name}</div>
+    <div style="height:10px;background:rgba(148,163,184,0.05);border-radius:3px;overflow:hidden;"><div style="height:100%;width:${w}%;background:${c}80;border-radius:3px;"></div></div>
+    <div style="font-size:10px;font-family:'JetBrains Mono';color:${c};text-align:right;font-weight:700;">${f.val>0?'+':''}${f.val.toFixed(3)}</div>
+  </div>`;
+});
+
+// ─── Trust Distribution ───
+const dists = [
+  { label: 'CRITICAL (0-20)', count: 3, color: '#ef4444' },
+  { label: 'HIGH RISK (20-40)', count: 5, color: '#f97316' },
+  { label: 'MEDIUM (40-60)', count: 6, color: '#eab308' },
+  { label: 'LOW RISK (60-80)', count: 0, color: '#22c55e' },
+  { label: 'TRUSTED (80-100)', count: 186, color: '#06b6d4' },
+];
+const maxD = 186;
+const dEl = document.getElementById('trustDist');
+dists.forEach(d => {
+  const w = Math.max(2, (d.count / maxD * 100)).toFixed(0);
+  dEl.innerHTML += `<div class="bar-row">
+    <div class="bar-label" style="min-width:140px; font-size:10px;">${d.label}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:${w}%; background:${d.color};">${d.count>5?d.count:''}</div></div>
+    <div class="bar-value" style="min-width:30px;">${d.count}</div>
+  </div>`;
+});
+</script>
+</body>
+</html>
