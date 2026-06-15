@@ -123,11 +123,26 @@ class RiskEngine:
         risk_scores: np.ndarray,
     ) -> np.ndarray:
         """
-        Convert risk scores to trust scores (0-100, higher = more trusted).
+        Convert risk scores to trust scores using exponential privilege decay.
 
-        Trust = initial - penalty × risk_factor
+        Formula (Zero Trust formalization):
+            trust = initial × exp(-λ × risk_factor)
+
+        Where λ = decay_rate. High risk → exponential trust collapse.
+        Normal behavior (low risk) maintains trust near initial value.
         """
-        trust = self.trust_initial - (risk_scores * self.penalty_base / 100.0 * 2)
+        # Normalize risk to [0, ~5] range for exponential scaling
+        risk_factor = risk_scores / 100.0 * 5.0
+
+        # Exponential decay: trust drops sharply as risk increases
+        trust = self.trust_initial * np.exp(-self.decay_rate * 10 * risk_factor)
+
+        # Apply penalty for extreme risk (above 70)
+        extreme_mask = risk_scores > 70
+        trust[extreme_mask] *= np.exp(
+            -self.penalty_base / 100.0 * (risk_scores[extreme_mask] - 70) / 30.0
+        )
+
         trust = np.clip(trust, 0, 100)
         return trust
 
@@ -139,24 +154,64 @@ class RiskEngine:
     ) -> pd.DataFrame:
         """
         Compute trust score evolution over time per employee.
-        Implements privilege decay and reinforcement.
+        Implements exponential privilege decay and reinforcement.
+
+        Trust dynamics per day:
+            1. Natural decay: trust *= exp(-λ × Δt)  (trust is perishable)
+            2. Risk penalty: trust *= exp(-penalty × risk_factor)
+            3. Reinforcement: if risk < 20 → trust += reinforcement × (1 - trust/100)
+            4. Clamp to [0, 100]
+
+        This formalizes Zero Trust: access privileges EXPIRE unless
+        continuously re-earned through normal behavior.
         """
-        trust_scores = self.compute_trust_scores(risk_scores)
+        instant_trust = self.compute_trust_scores(risk_scores)
 
         df = pd.DataFrame({
             "emp_id": emp_ids,
             "day_index": day_indices,
             "risk_score": risk_scores,
-            "trust_score_raw": trust_scores,
+            "trust_score_instant": instant_trust,
         })
 
-        # Apply temporal smoothing per employee (EMA)
         results = []
         for emp_id, emp_data in df.groupby("emp_id"):
             emp_data = emp_data.sort_values("day_index").copy()
-            smoothed = emp_data["trust_score_raw"].ewm(span=5, min_periods=1).mean()
-            emp_data["trust_score"] = smoothed.round(2)
+
+            # Initialize running trust
+            running_trust = self.trust_initial
+            trust_values = []
+
+            prev_day = None
+            for _, row in emp_data.iterrows():
+                day = row["day_index"]
+                risk = row["risk_score"]
+
+                # 1. Natural decay (trust is perishable — Zero Trust)
+                if prev_day is not None:
+                    idle_gap = day - prev_day
+                    running_trust *= np.exp(-self.decay_rate * idle_gap)
+
+                # 2. Risk penalty (exponential collapse for high risk)
+                risk_factor = risk / 100.0
+                running_trust *= np.exp(-self.penalty_base / 100.0 * risk_factor)
+
+                # 3. Reinforcement (normal behavior rebuilds trust gradually)
+                if risk < 20:
+                    headroom = (100.0 - running_trust) / 100.0
+                    running_trust += self.reinforcement * headroom
+
+                # 4. Clamp
+                running_trust = max(0.0, min(100.0, running_trust))
+                trust_values.append(round(running_trust, 2))
+                prev_day = day
+
+            emp_data["trust_score"] = trust_values
             emp_data["trust_level"] = emp_data["trust_score"].apply(_get_trust_level)
+
+            # Also compute rate of decay for visualization
+            emp_data["trust_delta"] = emp_data["trust_score"].diff().fillna(0).round(2)
+
             results.append(emp_data)
 
         return pd.concat(results).reset_index(drop=True)

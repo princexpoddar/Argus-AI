@@ -1,0 +1,121 @@
+{
+  "privacy_report": {
+    "epsilon_budget": 2.0,
+    "epsilon_spent": 0.0252,
+    "delta": 1e-05,
+    "steps_completed": 150,
+    "steps_total": 11910,
+    "noise_multiplier": 0.6656
+  },
+  "config": {
+    "n_rounds": 10,
+    "epsilon": 2.0,
+    "delta": 1e-05,
+    "departments": [
+      "retail_banking",
+      "treasury",
+      "it_admin",
+      "hr",
+      "compliance"
+    ],
+    "total_samples": 12710
+  },
+  "training_history": {
+    "round": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "avg_loss": [
+      1.0478,
+      0.948,
+      0.899,
+      0.8592,
+      0.8274,
+      0.7782,
+      0.7413,
+      0.7096,
+      0.7218,
+      0.7278
+    ],
+    "dept_losses": [
+      {
+        "retail_banking": 1.1619,
+        "treasury": 0.3993,
+        "it_admin": 1.3165,
+        "hr": 1.1056,
+        "compliance": 1.2555
+      },
+      {
+        "retail_banking": 1.0577,
+        "treasury": 0.3024,
+        "it_admin": 1.2328,
+        "hr": 0.9474,
+        "compliance": 1.1996
+      },
+      {
+        "retail_banking": 0.9763,
+        "treasury": 0.2069,
+        "it_admin": 1.1729,
+        "hr": 0.9092,
+        "compliance": 1.2296
+      },
+      {
+        "retail_banking": 0.8557,
+        "treasury": 0.1735,
+        "it_admin": 1.1327,
+        "hr": 0.8428,
+        "compliance": 1.2911
+      },
+      {
+        "retail_banking": 0.835,
+        "treasury": 0.1367,
+        "it_admin": 1.123,
+        "hr": 0.7995,
+        "compliance": 1.2429
+      },
+      {
+        "retail_banking": 0.7474,
+        "treasury": 0.1159,
+        "it_admin": 1.0906,
+        "hr": 0.75,
+        "compliance": 1.1871
+      },
+      {
+        "retail_banking": 0.6256,
+        "treasury": 0.1004,
+        "it_admin": 1.0685,
+        "hr": 0.7086,
+        "compliance": 1.2035
+      },
+      {
+        "retail_banking": 0.5994,
+        "treasury": 0.1,
+        "it_admin": 0.9958,
+        "hr": 0.6811,
+        "compliance": 1.1715
+      },
+      {
+        "retail_banking": 0.5712,
+        "treasury": 0.0847,
+        "it_admin": 1.0505,
+        "hr": 0.697,
+        "compliance": 1.2054
+      },
+      {
+        "retail_banking": 0.5248,
+        "treasury": 0.0792,
+        "it_admin": 1.0731,
+        "hr": 0.6877,
+        "compliance": 1.2742
+      }
+    ]
+  }
+}

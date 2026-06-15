@@ -106,7 +106,8 @@ Current activity is **continuously compared against the twin**. Deviations trigg
 ### 🧠 Module 2: Hybrid Risk Scoring Engine
 - **LSTM Autoencoder** — detects temporal anomalies (behavior unusual given recent history)
 - **Isolation Forest** — detects static anomalies (extreme single-day deviations)
-- **Ensemble Fusion** — combines both for superior detection (target F1 > 0.85)
+- **XGBoost + LightGBM** — supervised classifiers with 211 engineered features
+- **Meta-Learner Ensemble** — stacks all 4 models for SOTA detection (F1=0.95, AUC=0.98)
 
 ### 🔐 Module 3: Privilege Context Engine
 - Role-Resource risk matrix (same action = different risk for different roles)
@@ -137,7 +138,7 @@ Current activity is **continuously compared against the twin**. Deviations trigg
 | **Classical ML** | scikit-learn | 1.5+ | Isolation Forest, preprocessing, metrics |
 | **Gradient Boosting** | XGBoost | 2.x | Baseline comparisons |
 | **Data Processing** | pandas, numpy | Latest | Feature engineering, data manipulation |
-| **Synthetic Data** | SDV (CTGAN) | 1.x | Banking-specific synthetic data generation |
+| **Synthetic Data** | SDV (CTGAN) | 1.x | Synthetic data experiment (SMOTE preferred for augmentation) |
 | **Explainability** | SHAP | 0.45+ | Feature-level explanations |
 | **API** | FastAPI | 0.110+ | Real-time scoring REST API (<200ms) |
 | **API Server** | Uvicorn | Latest | ASGI server for FastAPI |
@@ -322,9 +323,9 @@ npm run dev
 | 2 | **Privilege Decay Functions** | Trust as a perishable resource with exponential decay — Zero Trust formalized |
 | 3 | **Intent Signal Chain Detection** | Attack *narratives*, not isolated anomalies — catches multi-step attacks |
 | 4 | **Peer Constellation Analysis** | Contextual anomaly via social comparison — catches slow-burn insiders |
-| 5 | **Hybrid LSTM + IF Ensemble** | Complementary temporal + static detection — SOTA performance |
-| 6 | **Banking Synthetic Data Generator** | CTGAN + Markov chains + scenario injection for banking domain |
-| 7 | **Privacy-Preserving Cross-Dept FL** | Federated Learning + Differential Privacy for banking compliance |
+| 5 | **Hybrid LSTM + IF + XGBoost/LightGBM Ensemble** | 5-model meta-learner stack — unsupervised + supervised + temporal + static |
+| 6 | **Banking Synthetic Data Generator** | Markov chains + scenario injection; CTGAN evaluated but SMOTE outperforms (233 samples insufficient for GAN) |
+| 7 | **Privacy-Preserving Cross-Dept FL** | Federated Learning + Differential Privacy (ε-DP) for banking compliance |
 
 ---
 
